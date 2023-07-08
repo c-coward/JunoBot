@@ -1,0 +1,50 @@
+version: "0.1"
+
+services:
+  juno:
+    image: image:tag # Paste the image repo link, or build and use a local image
+    container_name: juno_bot
+    restart: unless-stopped
+    environment:
+      - DISCORD_TOKEN=your_discord_token
+      - LAVALINK_HOSTNAME=lavalink
+      - LAVALINK_PORT=2333
+      - LAVALINK_PASSWORD=youshallnotpass # Make sure this matches the lavalink password below
+    networks:
+      - lavalink
+    depends_on:
+      lavalink:
+        condition: service_healthy
+        restart: true
+
+  lavalink:
+    image: image:tag # Paste the lavalink image repository link here
+    container_name: lavalink
+    restart: unless-stopped
+    environment:
+      - _JAVA_OPTIONS=-Xmx2G # Configure the allocated memory
+      - SERVER_PORT=2333
+      - LAVALINK_SERVER_PASSWORD=youshallnotpass # Set the password for lavalink
+      - LAVALINK_SERVER_SOURCES_YOUTUBE=true
+      - LAVALINK_SERVER_SOURCES_BANDCAMP=true
+      - LAVALINK_SERVER_SOURCES_SOUNDCLOUD=true
+      - LAVALINK_SERVER_SOURCES_VIMEO=true
+      - LAVALINK_SERVER_BUFFER_DURATION_MS=400
+      - LAVALINK_SERVER_YOUTUBE_SEARCH_ENABLED=true
+      - LAVALINK_SERVER_SOUNDCLOUD_SEARCH_ENABLED=true
+      - LAVALINK_SERVER_GC_WARNINGS=true
+      - LOGGING_FILE_PATH=./logs/
+      - LOGGING_LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE=1GB
+      - LOGGING_LOGBACK_ROLLINGPOLICY_MAX_HISTORY=30
+    networks:
+      - lavalink
+    expose:
+      - 2333
+    healthcheck:
+      test: cat ./logs/spring.log | grep -q "Lavalink is ready to accept connections."
+      interval: 30s
+      timeout: 10s
+      retries: 3
+networks:
+  lavalink:
+    name: lavalink

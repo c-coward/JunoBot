@@ -1,21 +1,17 @@
 namespace JunoBot
 
-open System.IO
-open Microsoft.Extensions.Configuration
-
 module Configuration =
-    [<CLIMutable>]
+
     type Lavalink =
         { Hostname: string
           Port: int
           Password: string }
 
-    [<CLIMutable>]
     type Config = { Token: string; Lavalink: Lavalink }
 
     let appConfig =
-        ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("config/AppSettings.json", true, true)
-            .Build()
-            .Get<Config>()
+        { Token = System.Environment.GetEnvironmentVariable "DISCORD_TOKEN"
+          Lavalink =
+            { Hostname = System.Environment.GetEnvironmentVariable "LAVALINK_HOSTNAME"
+              Port = System.Environment.GetEnvironmentVariable "LAVALINK_PORT" |> int
+              Password = System.Environment.GetEnvironmentVariable "LAVALINK_PASSWORD" } }
