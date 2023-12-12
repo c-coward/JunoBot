@@ -7,10 +7,18 @@ open DSharpPlus.CommandsNext.Attributes
 open DSharpPlus.Lavalink
 open System.Threading.Tasks
 
+open JunoBot.Util.Music
+
 type Music() =
     inherit BaseCommandModule()
 
     [<Command "ping">]
     [<Description "Test the bot's connection">]
-    let ping (ctx: CommandContext) : Task =
-        task { ctx.RespondAsync("pong!") |> ignore }
+    member this.Ping(ctx: CommandContext, [<RemainingText>] txt: string) : Task =
+        task { ctx.RespondAsync("Pong!") |> ignore }
+
+    member this.Join(ctx: CommandContext) : Task =
+        task {
+            let node = getLavaNode ctx
+            return ()
+        }

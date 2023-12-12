@@ -38,6 +38,7 @@ module Program =
         client.ConnectAsync() |> Async.AwaitTask |> Async.RunSynchronously
 
         printfn "JunoBot: Attempting Lavalink connection... "
+        let _ = Task.Delay(30000) |> Async.AwaitTask |> Async.RunSynchronously // Give Lavalink time to spin up
         let lava = client.UseLavalink()
 
         let lavaConfig =

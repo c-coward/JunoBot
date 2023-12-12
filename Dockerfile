@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0-jammy-arm64v8
+FROM mcr.microsoft.com/dotnet/sdk:8.0.100-1-alpine3.18-amd64
 WORKDIR /App
 
 COPY . ./
