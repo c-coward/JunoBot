@@ -2,8 +2,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <ContainerRepository>juno-bot</ContainerRepository>
-    <ContainerFamily>alpine</ContainerFamily>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="src/util/Music.fs" />
