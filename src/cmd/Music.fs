@@ -17,8 +17,8 @@ type Music() =
     member this.Ping(ctx: CommandContext, [<RemainingText>] txt: string) : Task =
         task { ctx.RespondAsync("Pong!") |> ignore }
 
-    member this.Join(ctx: CommandContext) : Task =
-        task {
-            let node = getLavaNode ctx
-            return ()
-        }
+    // member this.Join(ctx: CommandContext) : Task =
+    //     task {
+    //         let node = getLavaNode ctx
+    //         return ()
+    //     }
