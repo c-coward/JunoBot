@@ -7,23 +7,21 @@ name: Docker
 
 on:
   push:
-    branches: [ "**" ]
+    branches: ["**"]
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: ["v*.*.*"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: juno-bot
-  DOTNET_VERSION: '8.0'
-
+  DOTNET_VERSION: "8.0"
 
 jobs:
   publish:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -58,7 +56,7 @@ jobs:
       - name: Setup dotnet SDK for publishing
         uses: actions/setup-dotnet@v4.0.0
         with:
-          dotnet-version: '8.0'
-      
+          dotnet-version: "8.0"
+
       - name: Publish container to GHCR
-        run: dotnet publish -p ContainerRepository='juno-bot' -p ContainerFamily='alpine' -p ContainerImageTags=${{ steps.meta.outputs.tags }} -p ContainerRegistry=${{ env.REGISTRY }} /t:PublishContainer
+        run: dotnet publish -p ContainerRepository='juno-bot' -p ContainerFamily='alpine' -p ContainerImageTags='${{ steps.meta.outputs.tags }}' -p ContainerRegistry=${{ env.REGISTRY }} /t:PublishContainer
