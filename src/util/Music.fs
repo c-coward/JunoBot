@@ -1,10 +1,10 @@
 namespace JunoBot.Util
 
-open DSharpPlus.Lavalink
+open DisCatSharp.Lavalink
 open System.Collections.Generic
 open System.Threading.Tasks
-open DSharpPlus.CommandsNext
-open DSharpPlus.Entities
+open DisCatSharp.CommandsNext
+open DisCatSharp.Entities
 
 module Music =
 

@@ -1,15 +1,16 @@
 ﻿namespace JunoBot
 
 open System.Threading.Tasks
-open DSharpPlus
-open DSharpPlus.CommandsNext
-open DSharpPlus.Net
-open DSharpPlus.Lavalink
+open DisCatSharp
+open DisCatSharp.CommandsNext
+open DisCatSharp.Net
+open DisCatSharp.Lavalink
 
 open Configuration
 open JunoBot.Commands
 
 module Program =
+    open DisCatSharp.Enums
     [<EntryPoint>]
     let main argv =
         printfn "JunoBot: Starting up"
@@ -21,14 +22,14 @@ module Program =
 
         config.Intents <-
             DiscordIntents.AllUnprivileged
-            ||| DiscordIntents.MessageContents
+            ||| DiscordIntents.MessageContent
             ||| DiscordIntents.GuildMessageReactions
 
         let client = new DiscordClient(config)
         printfn "JunoBot: Client configured"
 
         let cmdConfig = CommandsNextConfiguration()
-        cmdConfig.StringPrefixes <- [ "~" ]
+        cmdConfig.StringPrefixes <- ResizeArray(["~"])
 
         let cmd = client.UseCommandsNext(cmdConfig)
         cmd.RegisterCommands<Music>()

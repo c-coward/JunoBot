@@ -1,10 +1,10 @@
 namespace JunoBot.Commands
 
-open DSharpPlus
-open DSharpPlus.Net
-open DSharpPlus.CommandsNext
-open DSharpPlus.CommandsNext.Attributes
-open DSharpPlus.Lavalink
+open DisCatSharp
+open DisCatSharp.Net
+open DisCatSharp.CommandsNext
+open DisCatSharp.CommandsNext.Attributes
+open DisCatSharp.Lavalink
 open System.Threading.Tasks
 
 open JunoBot.Util.Music
