@@ -6,23 +6,23 @@ open System.Threading.Tasks
 open DisCatSharp.CommandsNext
 open DisCatSharp.Entities
 
-module Music =
+module Music = ()
 
-    let getLavaNode (ctx: CommandContext) =
-        ctx.Client.GetLavalink().ConnectedNodes.Values |> Seq.head
+    // let getLavaNode (ctx: CommandContext) =
+    //     ctx.Client.GetLavalink().ConnectedNodes.Values |> Seq.head
 
-    type Song =
-        { Track: LavalinkTrack
-          Member: DiscordMember }
+    // type Song =
+    //     { Track: LavalinkTrack
+    //       Member: DiscordMember }
 
-    type Player(conn: LavalinkGuildConnection) =
-        member val Connection: LavalinkGuildConnection = conn
-        member val Playlist: Queue<Song> = Queue<Song>()
+    // type Player(conn: LavalinkGuildConnection) =
+    //     member val Connection: LavalinkGuildConnection = conn
+    //     member val Playlist: Queue<Song> = Queue<Song>()
 
-    type GuildPlayer = Dictionary<DiscordGuild, Player>
+    // type GuildPlayer = Dictionary<DiscordGuild, Player>
 
-    type MusicController() =
-        member val Players = GuildPlayer()
+    // type MusicController() =
+    //     member val Players = GuildPlayer()
 
 // member this.AddGuildConnection (ctx: CommandContext) =
 //     if not (this.Players.ContainsKey ctx.Guild)
