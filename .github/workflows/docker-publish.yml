@@ -55,8 +55,10 @@ jobs:
           images: |
             ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
 
-      - name: Publish image with dotnet
+      - name: Setup dotnet SDK for publishing
         uses: actions/setup-dotnet@v4.0.0
         with:
           dotnet-version: '8.0'
-        run: dotnet publish -p ContainerRepository='juno-bot' -p ContainerFamily='alpine' -p ContainerImageTags=${{ steps.meta.outputs.tags }} /t:PublishContainer
+      
+      - name: Publish container to GHCR
+        run: dotnet publish -p ContainerRepository='juno-bot' -p ContainerFamily='alpine' -p ContainerImageTags=${{ steps.meta.outputs.tags }} -p ContainerRegistry=${{ env.REGISTRY }} /t:PublishContainer
